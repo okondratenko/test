@@ -16,13 +16,13 @@
 <?php
 include_once ('classes.php');
 $ini_array = parse_ini_file("config.ini", true);
-$host = $ini_array[PDO][host];
-$user = $ini_array[PDO][user];
-$pass = $ini_array[PDO][pass];
-$dbname = $ini_array[PDO][dbname];
-$table_name = $ini_array[sql][table_name];
-$type = $ini_array[sql][type];
-$application_id = $ini_array[sql][application_id];
+$host = $ini_array['PDO']['host'];
+$user = $ini_array['PDO']['user'];
+$pass = $ini_array['PDO']['pass'];
+$dbname = $ini_array['PDO']['dbname'];
+$table_name = $ini_array['sql']['table_name'];
+$type = $ini_array['sql']['type'];
+$application_id = $ini_array['sql']['application_id'];
 $month=$_GET['mid'];
 $year=$_GET['yid'];
 Articles::getArticles($month, $year);
