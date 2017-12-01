@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
-<h2><a href="../index.php">Главная</a></h2>
 <?php
 $ini_array = parse_ini_file("../config.ini", true);
 $host      = $ini_array['PDO']['host'];
@@ -29,6 +28,7 @@ $year           = $_GET['y'];
 include_once('../classes/articles.php');
 $articles = Articles::getArticles($month, $year);
 echo '<div class="container">';
+echo '<h2><a href="../index.php">Главная</a></h2>';
 echo '<table class="table table-striped">';
 echo '<tr><th>Название записи</th><th>Количество символов</th></tr>';
 $sum = 0;
