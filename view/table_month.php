@@ -2,7 +2,7 @@
 include_once ('../config.php');
 include_once (PATH.'/view/header.php');
 
-$articles=Controller::getFileMonth($_GET['y'],$_GET['m']);
+$articles=File::getFileMonth($_GET['y'],$_GET['m']);
 echo '<table class="table">';
 echo '<tr><th>Название статьи</th><th>Количество символов</th></tr>';
 $monthNames = Helper::monthName();

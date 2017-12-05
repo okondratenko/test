@@ -1,7 +1,7 @@
 <?php
 class Model
 {
-    static function updateTableYear($year, $month, $table_name, $application_id, $type, $pdo)
+    static function getLongMonthText($year,$month, $table_name, $application_id, $type, $pdo)
     {
         $y_m=$year.'-'.$month.'-%%';
         $sel = "SELECT elements FROM $table_name WHERE application_id=? AND type=? AND publish_up LIKE ?";
@@ -16,10 +16,10 @@ class Model
             $only_characters = str_replace($ar, "", $text_strip_tags);
             $long            += iconv_strlen($only_characters);
         }
-        return $long;
+    return $long;
     }
 
-    static function getArticlesMonth($year,$month, $table_name, $application_id, $type, $pdo)
+    static function getArticles($year,$month, $table_name, $application_id, $type, $pdo)
     {
         $y_m=$year.'-'.$month.'-%%';
         $sel = "SELECT name, elements FROM $table_name WHERE application_id=? AND type=? AND publish_up LIKE ?";
@@ -41,5 +41,7 @@ class Model
         $articles['Итого']=$summ;
         return $articles;
     }
+
+
 }
 ?>
