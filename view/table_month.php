@@ -1,6 +1,6 @@
 <?php
-include_once ($_SERVER['DOCUMENT_ROOT'].'/joomla_count_symbols/view/header.php');
-include_once ($_SERVER['DOCUMENT_ROOT'].'/joomla_count_symbols/config.php');
+include_once ('../config.php');
+include_once (PATH.'/view/header.php');
 
 $articles=Controller::getFileMonth($_GET['y'],$_GET['m']);
 echo '<table class="table">';
@@ -11,5 +11,5 @@ foreach ($articles as $key => $value){
 }
 echo '</table>';
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/joomla_count_symbols/view/footer.php');
+include_once(PATH.'/view/footer.php');
 ?>
