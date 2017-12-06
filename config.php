@@ -2,7 +2,7 @@
 spl_autoload_register(function ($class_name) {
     include_once $_SERVER['DOCUMENT_ROOT'].'/joomla_count_symbols/classes/' . $class_name . '.php';
 });
-define("PATH", "E:/OSPanel/domains/mkservices.dev/www/joomla_count_symbols");
+define("PATH", __DIR__);
 $ini_array      = parse_ini_file("config.ini", true);
 $pdo = Connect::pdo($ini_array['PDO']['host'], $ini_array['PDO']['user'], $ini_array['PDO']['pass'], $ini_array['PDO']['dbname']);
 ?>
