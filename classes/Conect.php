@@ -1,6 +1,6 @@
 <?php
 
-class Connect
+class Conect
 {
     static function pdo($host, $user, $pass, $dbname)
     {

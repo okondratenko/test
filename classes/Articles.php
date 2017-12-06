@@ -1,5 +1,5 @@
 <?php
-class Model
+class Articles
 {
     private $pdo;
     function __construct($pdo)

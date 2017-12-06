@@ -1,5 +1,5 @@
 <?php
-echo '<div class="container">';
+
 if (isset($_POST['ReedTableYear'])) {
     echo '<h2><span style="color:green;"> Год ' . $_POST['number_year'] . '</span></h2>';
     echo '<table class="table table-striped">';
@@ -20,5 +20,4 @@ if (isset($_POST['UpdateTableYear'])) {
     echo '</table>';
 }
 
-echo '</div>';
 ?>
