@@ -42,7 +42,7 @@ class File
         return $tables;
     }
 
-    static function getTables($long, $month)
+    static function getTable($long, $month, $year)
     {
         $file_year    = fopen(PATH . '/data/' . $year . '.tmp', 'a+');
         $json_content = file_get_contents(PATH . '/data/' . $year . '.tmp');
@@ -62,6 +62,8 @@ class File
                             "11" => "0",
                             "12" => "0"
             );
+            $tables = json_encode($tables);
+            $tables = json_decode($tables);
         }
         $tables->$month = $long;
         $json_content   = json_encode($tables);
@@ -72,7 +74,7 @@ class File
         return $tables;
     }
 
-    static function putArticlesMonth($articles)
+    static function putArticlesMonth($articles, $month, $year)
     {
     $file_month = fopen(PATH.'/data/'.$year.'-'.$month.'.tmp', 'w');
     $art_json = json_encode($articles);
