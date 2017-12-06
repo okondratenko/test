@@ -10,12 +10,13 @@ if (isset($_POST['ReedTableYear'])) {
 }
 
 if (isset($_POST['UpdateTableYear'])) {
-    $update_table_year = Model::updateTableYear($_POST['number_year'], $_POST['number_month'],
-        $ini_array['sql']['table_name'], $ini_array['sql']['application_id'], $ini_array['sql']['type'], $pdo);
+    $m=new Model($pdo);
+    $update_table_year = $m->updateTableYear($_POST['number_year'], $_POST['number_month'],
+        $ini_array['sql']['table_name'], $ini_array['sql']['application_id'], $ini_array['sql']['type']);
     $update_table_year=File::getTables($update_table_year, $_POST['number_month']);
     include_once(PATH . '/view/select_month.php');
-    $articles = Model::getArticlesMonth($_POST['number_year'], $_POST['number_month'], $ini_array['sql']['table_name'],
-        $ini_array['sql']['application_id'], $ini_array['sql']['type'], $pdo);
+    $articles = $m->getArticlesMonth($_POST['number_year'], $_POST['number_month'], $ini_array['sql']['table_name'],
+        $ini_array['sql']['application_id'], $ini_array['sql']['type']);
     File::putArticlesMonth($articles);
 }
 

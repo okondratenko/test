@@ -1,11 +1,17 @@
 <?php
 class Model
 {
-    static function updateTableYear($year, $month, $table_name, $application_id, $type, $pdo)
+    private $pdo;
+    function __construct($pdo)
+    {
+        $this->pdo=$pdo;
+    }
+
+    function updateTableYear($year, $month, $table_name, $application_id, $type)
     {
         $y_m=$year.'-'.$month.'-%%';
         $sel = "SELECT elements FROM $table_name WHERE application_id=? AND type=? AND publish_up LIKE ?";
-        $ps=$pdo->prepare($sel);
+        $ps=$this->pdo->prepare($sel);
         $ps->execute(array($application_id, $type, $y_m));
         $long=0;
         while ($row = $ps->fetch()) {
@@ -19,11 +25,11 @@ class Model
         return $long;
     }
 
-    static function getArticlesMonth($year,$month, $table_name, $application_id, $type, $pdo)
+    function getArticlesMonth($year,$month, $table_name, $application_id, $type)
     {
         $y_m=$year.'-'.$month.'-%%';
         $sel = "SELECT name, elements FROM $table_name WHERE application_id=? AND type=? AND publish_up LIKE ?";
-        $ps=$pdo->prepare($sel);
+        $ps=$this->pdo->prepare($sel);
         $ps->execute(array($application_id, $type, $y_m));
         $articles=array();
         $summ=0;
