@@ -18,8 +18,13 @@ class Help
             '11' => 'Ноябрь',
             '12' => 'Декабрь'
         ];
+        try {
+            return $month;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
 
-        return $month;
+            return false;
+        }
     }
 }
 
