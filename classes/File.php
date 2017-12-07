@@ -4,107 +4,66 @@ class File
 {
     static function tableDataYear($year)
     {
-        try {
-            $file_year    = fopen(PATH . '/data/' . $year . '.tmp', 'a+');
+        if (file_exists(PATH . '/data/' . $year . '.tmp')) {
             $json_content = file_get_contents(PATH . '/data/' . $year . '.tmp');
             $tables       = json_decode($json_content);
-            if ($tables == "") {
-                $tables       = array(
-                    "1"  => "0",
-                    "2"  => "0",
-                    "3"  => "0",
-                    "4"  => "0",
-                    "5"  => "0",
-                    "6"  => "0",
-                    "7"  => "0",
-                    "8"  => "0",
-                    "9"  => "0",
-                    "10" => "0",
-                    "11" => "0",
-                    "12" => "0"
-                );
-                $json_content = json_encode($tables);
-                file_put_contents(PATH . '/data/' . $year . '.tmp', $json_content);
+        } else {
+            $tables = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $i          = str_pad($i, 2, '0', STR_PAD_LEFT);
+                $tables[$i] = 0;
             }
-            fclose($file_year);
-
-            return $tables;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-
-            return false;
         }
+
+        return $tables;
     }
 
     static function getFileMonth($year, $month)
     {
-        try {
-            $file_nonth   = fopen(PATH . '/data/' . $year . '-' . $month . '.tmp', 'a+');
+        if (file_exists(PATH . '/data/' . $year . '-' . $month . '.tmp')) {
             $json_content = file_get_contents(PATH . '/data/' . $year . '-' . $month . '.tmp');
             $tables       = json_decode($json_content);
-            if ($tables == null) {
-                echo '<h3>файл небыл обновлён</h3>';
-                exit();
-            }
-
-            return $tables;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-
-            return false;
+        } else {
+            echo '<h3>файл небыл обновлён</h3>';
+            exit();
         }
+
+        return $tables;
     }
 
     static function getTable($long, $month, $year)
     {
-        try {
-            $file_year    = fopen(PATH . '/data/' . $year . '.tmp', 'a+');
+        if (file_exists(PATH . '/data/' . $year . '.tmp')) {
             $json_content = file_get_contents(PATH . '/data/' . $year . '.tmp');
-            fclose($file_year);
-            $tables = json_decode($json_content);
-            if ($tables == "") {
-                $tables = array(
-                    "1"  => "0",
-                    "2"  => "0",
-                    "3"  => "0",
-                    "4"  => "0",
-                    "5"  => "0",
-                    "6"  => "0",
-                    "7"  => "0",
-                    "8"  => "0",
-                    "9"  => "0",
-                    "10" => "0",
-                    "11" => "0",
-                    "12" => "0"
-                );
-                $tables = json_encode($tables);
-                $tables = json_decode($tables);
+            $tables       = json_decode($json_content);
+        } else {
+            $tables = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $i          = str_pad($i, 2, '0', STR_PAD_LEFT);
+                $tables[$i] = 0;
             }
-            $tables->$month = $long;
-            $json_content   = json_encode($tables);
-            $file_year      = fopen(PATH . '/data/' . $year . '.tmp', 'w');
-            file_put_contents(PATH . '/data/' . $year . '.tmp', $json_content);
-            fclose($file_year);
-
-            return $tables;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-
-            return false;
+            $tables = (object)$tables;
         }
+        $tables->$month = $long;
+
+        return $tables;
     }
+
+    static function putTable($tables, $year)
+    {
+        $json_content = json_encode($tables);
+        $file_year    = fopen(PATH . '/data/' . $year . '.tmp', 'w');
+        file_put_contents(PATH . '/data/' . $year . '.tmp', $json_content);
+        fclose($file_year);
+    }
+
 
     static function putArticlesMonth($articles, $month, $year)
     {
-        try {
-            $file_month = fopen(PATH . '/data/' . $year . '-' . $month . '.tmp', 'w');
-            $art_json   = json_encode($articles);
-            file_put_contents(PATH . '/data/' . $year . '-' . $month . '.tmp', $art_json);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-
-            return false;
-        }
+        $file_month = fopen(PATH . '/data/' . $year . '-' . $month . '.tmp', 'w');
+        $art_json   = json_encode($articles);
+        file_put_contents(PATH . '/data/' . $year . '-' . $month . '.tmp', $art_json);
+        fclose($file_month);
     }
 }
 

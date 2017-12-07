@@ -1,5 +1,4 @@
 <?php
-try {
     define("PATH", __DIR__);
     spl_autoload_register(function ($class_name) {
         include_once PATH . '/classes/' . $class_name . '.php';
@@ -8,9 +7,4 @@ try {
     $pdo        = Conect::pdo($ini_array['PDO']['host'], $ini_array['PDO']['user'], $ini_array['PDO']['pass'],
         $ini_array['PDO']['dbname']);
     $monthNames = Help::monthName();
-} catch (PDOException $e) {
-    echo $e->getMessage();
-
-    return false;
-}
 ?>
