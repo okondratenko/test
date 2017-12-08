@@ -1,12 +1,11 @@
 <?php
 
-class Articles
+class Articles extends Db
 {
-    private $pdo;
 
-    function __construct($pdo)
+    function __construct()
     {
-        $this->pdo = $pdo;
+        parent::__construct();
     }
 
     function textLength($year, $month, $table_name, $application_id, $type)

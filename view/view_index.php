@@ -1,7 +1,7 @@
 <?php
 echo '<form action="index.php" method="post">';
     echo '<select name="number_year">';
-    for($i=date(Y)-1; $i<=date(Y)+3;$i++) {
+    for($i=date(Y)-5; $i<=date(Y);$i++) {
         echo '<option value="'.$i.'"';  echo ($i==$_POST["number_year"]) ? 'selected': ''; echo '>' .$i. '</option>';
     }
         echo '</select>';
