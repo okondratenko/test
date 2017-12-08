@@ -24,6 +24,5 @@ if (isset($_POST['UpdateTableYear'])) {
 }
 
 
-
 include_once(PATH.'/view/footer.php');
 ?>
